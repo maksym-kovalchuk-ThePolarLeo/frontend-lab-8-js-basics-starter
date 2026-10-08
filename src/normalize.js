@@ -28,5 +28,13 @@
  * @returns {Show}
  */
 export function normalizeShow(raw) {
-  throw new Error('Not implemented');
+  return {
+    id: raw.id,
+    name: raw.name,
+    year: raw.premiered ? parseInt(raw.premiered.split('-')[0]) : null,
+    rating: raw.rating && raw.rating.average !== null ? raw.rating.average : null,
+    runtime: raw.runtime ? raw.runtime : null,
+    network: raw.network ? raw.network.name : null,
+    genres: Array.isArray(raw.genres) ? structuredClone(raw.genres) : [],
+  };
 }
